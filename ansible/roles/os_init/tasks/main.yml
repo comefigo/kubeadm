@@ -1,0 +1,11 @@
+---
+- name: Update to latest packages
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: Set timezone to Asia/Tokyo
+  timezone:
+    name: "{{ ec2_all.tz }}"
+  become: yes

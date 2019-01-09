@@ -1,0 +1,4 @@
+---
+ec2_all:
+  work_user: "ec2-user"
+  tz: "Asia/Tokyo"

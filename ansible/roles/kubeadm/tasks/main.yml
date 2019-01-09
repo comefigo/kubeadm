@@ -1,0 +1,25 @@
+---
+- name: Copy kubernetes repo config
+  copy:
+    src: "kubernetes.repo"
+    dest: "/etc/yum.repos.d/kubernetes.repo"
+    owner: "root"
+    group: "root"
+  become: yes
+
+- name: Install k8s modules
+  yum:
+    name:  ['kubelet', 'kubeadm', 'kubectl']
+    state: present
+    disable_excludes: "kubernetes"
+    enablerepo: kubernetes
+    disable_gpg_check: yes
+  become: yes
+
+- name: Enable startup kubelet service
+  systemd:
+    name: kubelet
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  become: yes
