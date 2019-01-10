@@ -9,3 +9,19 @@
   timezone:
     name: "{{ ec2_all.tz }}"
   become: yes
+
+- name: Stop swap all
+  command: swapoff -a
+  become: yes
+
+- name: Fix network routing problem
+  copy:
+    src: "k8s.conf"
+    dest: "/etc/sysctl.d/k8s.conf"
+    owner: "root"
+    group: "root"
+  become: yes
+
+- name: Load sysctl
+  command: sysctl --system
+  become: yes
