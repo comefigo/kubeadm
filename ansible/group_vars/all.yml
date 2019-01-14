@@ -4,4 +4,5 @@ ec2_all:
   tz: "Asia/Tokyo"
 k8s_all:
   network:
-    cird: "172.32.2.0/24"
+    # flannel network must be use these podCIDR
+    cird: "10.244.0.0/16"

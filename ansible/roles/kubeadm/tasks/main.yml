@@ -9,12 +9,18 @@
 
 - name: Install k8s modules
   yum:
-    name:  ['kubelet', 'kubeadm', 'kubectl']
+    name:  ['kubelet', 'kubeadm', 'kubectl', 'kubernetes-cni']
     state: present
     disable_excludes: "kubernetes"
     enablerepo: kubernetes
     disable_gpg_check: yes
   become: yes
+
+- name: Save configs
+  file:
+    path: "~/.kube"
+    state: directory
+
 
 - name: Enable startup kubelet service
   systemd:
